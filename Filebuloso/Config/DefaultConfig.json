@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "defaultDirectory": "C:\\Users\\Username\\Downloads",
+  "confirmBeforeProcessing": true,
+  "dryRunByDefault": false,
+  "categories": [
+    { "name": "documents_word", "extensions": ["doc", "docx"] },
+    { "name": "documents_text", "extensions": ["txt"] },
+    { "name": "spreadsheets", "extensions": ["xlsx", "xls", "csv"] },
+    { "name": "presentations", "extensions": ["pptx", "ppt"] },
+    { "name": "pdf", "extensions": ["pdf"] },
+    { "name": "cad_autocad", "extensions": ["dwg", "dxf"] },
+    { "name": "cad_solidworks", "extensions": ["sldprt", "sldasm", "slddrw"] },
+    { "name": "cad_3d", "extensions": ["step", "stp", "iges", "igs", "stl", "sat", "x_t", "x_b", "shapr"] },
+    { "name": "tif", "extensions": ["tif", "tiff"] },
+    { "name": "images", "extensions": ["png", "jpg", "jpeg", "jfif", "gif", "bmp", "heic", "heif", "webp", "svg", "ico"] },
+    { "name": "webpages", "extensions": ["html", "htm"] },
+    { "name": "archives", "extensions": ["zip", "rar", "7z", "tar", "gz"] },
+    { "name": "executables", "extensions": ["exe", "msi", "bat", "ps1"] },
+    { "name": "disk_images", "extensions": ["iso"] },
+    { "name": "data", "extensions": ["json", "xml", "yaml", "yml"] },
+    { "name": "video", "extensions": ["mp4", "avi", "mov", "mkv", "wmv", "flv"] },
+    { "name": "audio", "extensions": ["mp3", "wav", "flac", "aac", "m4a", "ogg"] },
+    { "name": "code", "extensions": ["py", "js", "java", "cpp", "c", "h", "cs", "php", "rb", "go", "rs"] },
+    { "name": "notebooks", "extensions": ["ipynb"] }
+  ],
+  "window": {
+    "width": 800,
+    "height": 600,
+    "x": 100,
+    "y": 100
+  },
+  "logging": {
+    "keepDays": 30,
+    "maxLogFiles": 50,
+    "errorLogDays": 90
+  }
+}

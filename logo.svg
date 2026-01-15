@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Folder gradient -->
+    <linearGradient id="folderGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f4d03f;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e6b800;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Rainbow gradient -->
+    <linearGradient id="rainbow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="16%" style="stop-color:#ffa500;stop-opacity:1" />
+      <stop offset="33%" style="stop-color:#ffff00;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#00ff00;stop-opacity:1" />
+      <stop offset="66%" style="stop-color:#00bfff;stop-opacity:1" />
+      <stop offset="83%" style="stop-color:#0000ff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#8b00ff;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Sunburst glow -->
+    <radialGradient id="glow">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#ffff99;stop-opacity:0" />
+    </radialGradient>
+  </defs>
+  
+  <!-- Back folder (slightly offset for depth) -->
+  <g transform="translate(256, 300)">
+    <rect x="-180" y="-60" width="360" height="240" rx="15" 
+          fill="#f4d03f" opacity="0.5" stroke="#d4a017" stroke-width="3"/>
+    <path d="M -180 -60 L -180 -90 L -80 -90 L -70 -70 L 180 -70 L 180 -60 Z" 
+          fill="#f9e79f" opacity="0.5" stroke="#d4a017" stroke-width="3"/>
+  </g>
+  
+  <!-- Front folder -->
+  <g transform="translate(256, 320)">
+    <rect x="-180" y="-60" width="360" height="240" rx="15" 
+          fill="url(#folderGrad)" stroke="#d4a017" stroke-width="4"/>
+    <path d="M -180 -60 L -180 -90 L -80 -90 L -70 -70 L 180 -70 L 180 -60 Z" 
+          fill="#f9e79f" stroke="#d4a017" stroke-width="4"/>
+  </g>
+  
+  <!-- Rainbow arc with sunburst (moved down) -->
+  <g transform="translate(256, 280)">
+    <!-- White border -->
+    <path d="M -160 20 Q 0 -100 160 20" 
+          fill="none" stroke="white" stroke-width="45" stroke-linecap="round"/>
+    
+    <!-- Rainbow -->
+    <path d="M -160 20 Q 0 -100 160 20" 
+          fill="none" stroke="url(#rainbow)" stroke-width="35" stroke-linecap="round"/>
+    
+    <!-- Inner white -->
+    <path d="M -150 20 Q 0 -90 150 20" 
+          fill="none" stroke="white" stroke-width="18" stroke-linecap="round"/>
+    
+    <!-- Sunburst center -->
+    <circle cx="0" cy="-60" r="30" fill="url(#glow)" opacity="0.8"/>
+    
+    <!-- Sunburst rays -->
+    <g stroke="white" stroke-width="4" stroke-linecap="round" opacity="0.7">
+      <line x1="0" y1="-60" x2="0" y2="-110"/>
+      <line x1="-30" y1="-80" x2="-50" y2="-110"/>
+      <line x1="30" y1="-80" x2="50" y2="-110"/>
+    </g>
+  </g>
+</svg>
