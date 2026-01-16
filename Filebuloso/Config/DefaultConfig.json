@@ -1,38 +1,198 @@
 {
-  "version": "1.0",
-  "defaultDirectory": "C:\\Users\\Username\\Downloads",
-  "confirmBeforeProcessing": true,
-  "dryRunByDefault": false,
-  "categories": [
-    { "name": "documents_word", "extensions": ["doc", "docx"] },
-    { "name": "documents_text", "extensions": ["txt"] },
-    { "name": "spreadsheets", "extensions": ["xlsx", "xls", "csv"] },
-    { "name": "presentations", "extensions": ["pptx", "ppt"] },
-    { "name": "pdf", "extensions": ["pdf"] },
-    { "name": "cad_autocad", "extensions": ["dwg", "dxf"] },
-    { "name": "cad_solidworks", "extensions": ["sldprt", "sldasm", "slddrw"] },
-    { "name": "cad_3d", "extensions": ["step", "stp", "iges", "igs", "stl", "sat", "x_t", "x_b", "shapr"] },
-    { "name": "tif", "extensions": ["tif", "tiff"] },
-    { "name": "images", "extensions": ["png", "jpg", "jpeg", "jfif", "gif", "bmp", "heic", "heif", "webp", "svg", "ico"] },
-    { "name": "webpages", "extensions": ["html", "htm"] },
-    { "name": "archives", "extensions": ["zip", "rar", "7z", "tar", "gz"] },
-    { "name": "executables", "extensions": ["exe", "msi", "bat", "ps1"] },
-    { "name": "disk_images", "extensions": ["iso"] },
-    { "name": "data", "extensions": ["json", "xml", "yaml", "yml"] },
-    { "name": "video", "extensions": ["mp4", "avi", "mov", "mkv", "wmv", "flv"] },
-    { "name": "audio", "extensions": ["mp3", "wav", "flac", "aac", "m4a", "ogg"] },
-    { "name": "code", "extensions": ["py", "js", "java", "cpp", "c", "h", "cs", "php", "rb", "go", "rs"] },
-    { "name": "notebooks", "extensions": ["ipynb"] }
+  "Version": "1.0",
+  "DefaultDirectory": "C:\\Users\\Username\\Downloads",
+  "ConfirmBeforeProcessing": true,
+  "DryRunByDefault": false,
+  "Categories": [
+    {
+      "Name": "documents_word",
+      "Extensions": [
+        "doc",
+        "docx"
+      ]
+    },
+    {
+      "Name": "documents_text",
+      "Extensions": [
+        "txt"
+      ]
+    },
+    {
+      "Name": "spreadsheets",
+      "Extensions": [
+        "xlsx",
+        "xls",
+        "csv"
+      ]
+    },
+    {
+      "Name": "presentations",
+      "Extensions": [
+        "pptx",
+        "ppt"
+      ]
+    },
+    {
+      "Name": "pdf",
+      "Extensions": [
+        "pdf"
+      ]
+    },
+    {
+      "Name": "cad_autocad",
+      "Extensions": [
+        "dwg",
+        "dxf"
+      ]
+    },
+    {
+      "Name": "cad_solidworks",
+      "Extensions": [
+        "sldprt",
+        "sldasm",
+        "slddrw",
+        "easm"
+      ]
+    },
+    {
+      "Name": "cad_3d",
+      "Extensions": [
+        "step",
+        "stp",
+        "iges",
+        "igs",
+        "stl",
+        "sat",
+        "x_t",
+        "x_b",
+        "shapr"
+      ]
+    },
+    {
+      "Name": "tif",
+      "Extensions": [
+        "tif",
+        "tiff"
+      ]
+    },
+    {
+      "Name": "images",
+      "Extensions": [
+        "png",
+        "jpg",
+        "jpeg",
+        "jfif",
+        "gif",
+        "bmp",
+        "heic",
+        "heif",
+        "webp",
+        "svg",
+        "ico"
+      ]
+    },
+    {
+      "Name": "webpages",
+      "Extensions": [
+        "html",
+        "htm"
+      ]
+    },
+    {
+      "Name": "archives",
+      "Extensions": [
+        "zip",
+        "rar",
+        "7z",
+        "tar",
+        "gz"
+      ]
+    },
+    {
+      "Name": "executables",
+      "Extensions": [
+        "exe",
+        "msi",
+        "bat",
+        "ps1",
+        "package"
+      ]
+    },
+    {
+      "Name": "disk_images",
+      "Extensions": [
+        "iso"
+      ]
+    },
+    {
+      "Name": "data",
+      "Extensions": [
+        "json",
+        "xml",
+        "yaml",
+        "yml"
+      ]
+    },
+    {
+      "Name": "video",
+      "Extensions": [
+        "mp4",
+        "avi",
+        "mov",
+        "mkv",
+        "wmv",
+        "flv"
+      ]
+    },
+    {
+      "Name": "audio",
+      "Extensions": [
+        "mp3",
+        "wav",
+        "flac",
+        "aac",
+        "m4a",
+        "ogg"
+      ]
+    },
+    {
+      "Name": "code",
+      "Extensions": [
+        "py",
+        "js",
+        "java",
+        "cpp",
+        "c",
+        "h",
+        "cs",
+        "php",
+        "rb",
+        "go",
+        "rs"
+      ]
+    },
+    {
+      "Name": "notebooks",
+      "Extensions": [
+        "ipynb"
+      ]
+    },
+    {
+      "Name": "markdown",
+      "Extensions": [
+        "md"
+      ]
+    }
   ],
-  "window": {
-    "width": 800,
-    "height": 600,
-    "x": 100,
-    "y": 100
+  "Window": {
+    "Width": 800,
+    "Height": 600,
+    "X": 100,
+    "Y": 100
   },
-  "logging": {
-    "keepDays": 30,
-    "maxLogFiles": 50,
-    "errorLogDays": 90
+  "Logging": {
+    "KeepDays": 30,
+    "MaxLogFiles": 50,
+    "ErrorLogDays": 90
   }
 }
