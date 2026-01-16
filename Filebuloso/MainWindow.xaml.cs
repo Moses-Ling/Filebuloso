@@ -1,11 +1,13 @@
+using System;
 using System.IO;
-using System.Windows;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Documents;
+using Filebuloso.Helpers;
 using Filebuloso.Models;
 using Filebuloso.Services;
 using Filebuloso.Views;
-using Forms = System.Windows.Forms;
 
 namespace Filebuloso;
 
@@ -32,16 +34,11 @@ public partial class MainWindow : Window
 
     private void BrowseButton_Click(object sender, RoutedEventArgs e)
     {
-        using var dialog = new Forms.FolderBrowserDialog
+        var picker = new FolderPicker();
+        var selected = picker.PickFolder(this);
+        if (!string.IsNullOrWhiteSpace(selected))
         {
-            Description = "Select a folder to organize",
-            UseDescriptionForTitle = true,
-            ShowNewFolderButton = false
-        };
-
-        if (dialog.ShowDialog() == Forms.DialogResult.OK)
-        {
-            DirectoryTextBox.Text = dialog.SelectedPath;
+            DirectoryTextBox.Text = selected;
         }
     }
 
@@ -59,15 +56,18 @@ public partial class MainWindow : Window
             return;
         }
 
-        var confirm = System.Windows.MessageBox.Show(
-            $"Organize files in:\n{_selectedDirectory}\n\nThis may delete duplicate files.\nDry run mode: {_config.DryRunByDefault}",
-            "Confirm Organization",
-            MessageBoxButton.OKCancel,
-            MessageBoxImage.Warning);
-
-        if (confirm != MessageBoxResult.OK)
+        if (_config.ConfirmBeforeProcessing)
         {
-            return;
+            var confirm = System.Windows.MessageBox.Show(
+                $"Organize files in:\n{_selectedDirectory}\n\nThis may delete duplicate files.\nDry run mode: {_config.DryRunByDefault}",
+                "Confirm Organization",
+                MessageBoxButton.OKCancel,
+                MessageBoxImage.Warning);
+
+            if (confirm != MessageBoxResult.OK)
+            {
+                return;
+            }
         }
 
         StartOrganizationAsync(_selectedDirectory);
@@ -95,11 +95,6 @@ public partial class MainWindow : Window
         }
     }
 
-    private void ExitButton_Click(object sender, RoutedEventArgs e)
-    {
-        Close();
-    }
-
     private void CancelButton_Click(object sender, RoutedEventArgs e)
     {
         _cts?.Cancel();
@@ -118,8 +113,12 @@ public partial class MainWindow : Window
 
         var progress = new Progress<OrganizationProgress>(update =>
         {
-            ProgressBar.Value = update.Percentage;
-            StatusText.Text = update.CurrentOperation;
+            ProgressBar.IsIndeterminate = update.IsIndeterminate;
+            if (!update.IsIndeterminate)
+            {
+                ProgressBar.Value = update.Percentage;
+            }
+            ProgressBarText.Text = $"{update.CurrentOperation} Please wait!";
         });
 
         try
@@ -131,15 +130,19 @@ public partial class MainWindow : Window
                 progress,
                 _cts.Token));
 
-            System.Windows.MessageBox.Show(
-                result.SummaryText,
-                "Organization Summary",
-                MessageBoxButton.OK,
-                MessageBoxImage.Information);
+            DisplaySummary(result.SummaryText);
+            if (_config.ShowSummaryPopup)
+            {
+                System.Windows.MessageBox.Show(
+                    result.SummaryText,
+                    "Organization Summary",
+                    MessageBoxButton.OK,
+                    MessageBoxImage.Information);
+            }
         }
         catch (OperationCanceledException)
         {
-            StatusText.Text = "Canceled";
+            ProgressBarText.Text = "Canceled.";
         }
         finally
         {
@@ -167,7 +170,7 @@ public partial class MainWindow : Window
         BrowseButton.IsEnabled = enabled;
         StartButton.IsEnabled = enabled && !string.IsNullOrWhiteSpace(_selectedDirectory);
         CancelButton.IsEnabled = !enabled;
-        StatusText.Text = enabled ? "Ready" : "Processing...";
+        ProgressBarText.Text = enabled ? "Ready" : "Processing... Please wait!";
     }
 
     private void SaveSelectedDirectory()
@@ -196,5 +199,16 @@ public partial class MainWindow : Window
     private void MainWindow_Closed(object? sender, EventArgs e)
     {
         SaveSelectedDirectory();
+    }
+
+    private void DisplaySummary(string summary)
+    {
+        var document = new FlowDocument();
+        foreach (var line in summary.Split(new[] { "\r\n", "\n" }, StringSplitOptions.None))
+        {
+            document.Blocks.Add(new Paragraph(new Run(line)));
+        }
+
+        LogTextBox.Document = document;
     }
 }

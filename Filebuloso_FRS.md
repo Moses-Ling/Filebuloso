@@ -175,6 +175,11 @@ The application SHALL include the following default categories:
   - Categorizing AFTER duplicate removal prevents unnecessary collision checks
   - This approach is optimal for both first runs and subsequent runs
 
+- **FR-028.5:** Optional subfolder duplicate cleanup (disabled by default):
+  - When enabled, scan all subdirectories after categorization
+  - Group files by hash and delete duplicates
+  - Keep the oldest file by LastWriteTime (fallback to CreationTime)
+
 #### 3.7.0.1 Processing Order Example
 To illustrate the optimized hash-first approach with root-only scanning:
 

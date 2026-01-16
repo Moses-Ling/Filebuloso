@@ -14,6 +14,7 @@ public sealed class OrganizationOrchestrator
     private readonly DuplicateDetector _duplicateDetector;
     private readonly Categorizer _categorizer;
     private readonly FileOperations _fileOperations;
+    private readonly SubdirectoryDuplicateCleaner _subdirCleaner;
     private readonly Logger _logger;
 
     public OrganizationOrchestrator(
@@ -27,6 +28,7 @@ public sealed class OrganizationOrchestrator
         _duplicateDetector = duplicateDetector;
         _categorizer = categorizer;
         _fileOperations = fileOperations;
+        _subdirCleaner = new SubdirectoryDuplicateCleaner(new HashCalculator(), fileOperations, logger);
         _logger = logger;
     }
 
@@ -45,7 +47,8 @@ public sealed class OrganizationOrchestrator
             Percentage = 0,
             CurrentOperation = "Pre-scan complete",
             TotalFiles = totalFiles,
-            FilesProcessed = 0
+            FilesProcessed = 0,
+            IsIndeterminate = false
         });
 
         cancellationToken.ThrowIfCancellationRequested();
@@ -55,7 +58,8 @@ public sealed class OrganizationOrchestrator
             Percentage = 25,
             CurrentOperation = "Detecting duplicates",
             TotalFiles = totalFiles,
-            FilesProcessed = 0
+            FilesProcessed = 0,
+            IsIndeterminate = true
         });
 
         var duplicates = _duplicateDetector.DetectDuplicates(directory);
@@ -98,7 +102,8 @@ public sealed class OrganizationOrchestrator
             Percentage = 50,
             CurrentOperation = "Categorizing files",
             TotalFiles = totalFiles,
-            FilesProcessed = 0
+            FilesProcessed = 0,
+            IsIndeterminate = true
         });
 
         cancellationToken.ThrowIfCancellationRequested();
@@ -114,6 +119,26 @@ public sealed class OrganizationOrchestrator
             result.Errors.AddRange(categorization.Errors);
             _logger.LogOperation("MOVE", $"Files moved: {categorization.FilesMoved}");
             _logger.LogOperation("VERSION", $"Versions preserved: {categorization.VersionsPreserved}");
+
+            if (config.ScanSubdirectoriesForDuplicates)
+            {
+                progress?.Report(new OrganizationProgress
+                {
+                    Percentage = 90,
+                    CurrentOperation = "Scanning subfolders for duplicates",
+                    TotalFiles = totalFiles,
+                    FilesProcessed = totalFiles,
+                    IsIndeterminate = true
+                });
+
+                var subdirResult = _subdirCleaner.Clean(directory);
+                if (!subdirResult.Result.Success)
+                {
+                    result.Errors.Add(subdirResult.Result.Message);
+                }
+                result.SubfolderDuplicateGroups = subdirResult.Groups;
+                result.SubfolderDuplicatesDeleted = subdirResult.Deleted;
+            }
         }
         else
         {
@@ -133,7 +158,8 @@ public sealed class OrganizationOrchestrator
             Percentage = 100,
             CurrentOperation = "Complete",
             TotalFiles = totalFiles,
-            FilesProcessed = totalFiles
+            FilesProcessed = totalFiles,
+            IsIndeterminate = false
         });
 
         result.SummaryText = BuildSummary(result);
@@ -149,6 +175,11 @@ public sealed class OrganizationOrchestrator
         builder.AppendLine($"Versions preserved: {result.VersionsPreserved}");
         builder.AppendLine($"Files moved: {result.FilesMoved}");
         builder.AppendLine($"Uncategorized files: {result.UncategorizedFiles}");
+        if (result.SubfolderDuplicateGroups > 0 || result.SubfolderDuplicatesDeleted > 0)
+        {
+            builder.AppendLine($"Subfolder duplicate groups: {result.SubfolderDuplicateGroups}");
+            builder.AppendLine($"Subfolder duplicates deleted: {result.SubfolderDuplicatesDeleted}");
+        }
         if (result.Errors.Count > 0)
         {
             builder.AppendLine($"Errors: {result.Errors.Count}");

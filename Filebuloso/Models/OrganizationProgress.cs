@@ -6,4 +6,5 @@ public sealed class OrganizationProgress
     public string CurrentOperation { get; init; } = string.Empty;
     public int FilesProcessed { get; init; }
     public int TotalFiles { get; init; }
+    public bool IsIndeterminate { get; init; }
 }

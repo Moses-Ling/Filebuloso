@@ -3,6 +3,8 @@
   "DefaultDirectory": "C:\\Users\\Username\\Downloads",
   "ConfirmBeforeProcessing": true,
   "DryRunByDefault": false,
+  "ScanSubdirectoriesForDuplicates": false,
+  "ShowSummaryPopup": false,
   "Categories": [
     {
       "Name": "documents_word",

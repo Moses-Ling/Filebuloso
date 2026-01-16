@@ -10,6 +10,8 @@ public sealed class OrganizationResult
     public int VersionsPreserved { get; set; }
     public int FilesMoved { get; set; }
     public int UncategorizedFiles { get; set; }
+    public int SubfolderDuplicateGroups { get; set; }
+    public int SubfolderDuplicatesDeleted { get; set; }
     public List<string> Errors { get; } = new();
     public string SummaryText { get; set; } = string.Empty;
 }

@@ -8,6 +8,8 @@ public sealed class AppConfig
     public string DefaultDirectory { get; set; } = string.Empty;
     public bool ConfirmBeforeProcessing { get; set; } = true;
     public bool DryRunByDefault { get; set; } = false;
+    public bool ScanSubdirectoriesForDuplicates { get; set; } = false;
+    public bool ShowSummaryPopup { get; set; } = false;
     public List<FileCategory> Categories { get; set; } = new();
     public WindowSettings Window { get; set; } = new();
     public LoggingSettings Logging { get; set; } = new();

@@ -28,16 +28,18 @@ public partial class SettingsWindow : Window
 
     private void LoadValues()
     {
-        DefaultDirectoryTextBox.Text = _config.DefaultDirectory;
         ConfirmCheckBox.IsChecked = _config.ConfirmBeforeProcessing;
         DryRunCheckBox.IsChecked = _config.DryRunByDefault;
+        SubdirDuplicatesCheckBox.IsChecked = _config.ScanSubdirectoriesForDuplicates;
+        SummaryPopupCheckBox.IsChecked = _config.ShowSummaryPopup;
     }
 
     private void SaveButton_Click(object sender, RoutedEventArgs e)
     {
-        _config.DefaultDirectory = DefaultDirectoryTextBox.Text.Trim();
         _config.ConfirmBeforeProcessing = ConfirmCheckBox.IsChecked == true;
         _config.DryRunByDefault = DryRunCheckBox.IsChecked == true;
+        _config.ScanSubdirectoriesForDuplicates = SubdirDuplicatesCheckBox.IsChecked == true;
+        _config.ShowSummaryPopup = SummaryPopupCheckBox.IsChecked == true;
 
         try
         {

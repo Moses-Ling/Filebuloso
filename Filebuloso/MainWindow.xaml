@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Filebuloso"
         mc:Ignorable="d"
-        Title="Filebuloso" Height="600" Width="800" MinHeight="600" MinWidth="800"
+        Title="Filebuloso" Height="600" Width="540" MinHeight="600" MinWidth="540"
         Icon="Resources/icon.ico">
     <Grid Margin="16">
         <Grid.RowDefinitions>
@@ -30,57 +30,71 @@
             <TextBlock Grid.Column="1" Text="Directory" VerticalAlignment="Center" Margin="0,0,12,0"/>
             <TextBox x:Name="DirectoryTextBox"
                      Grid.Column="2"
-                     MinWidth="420"
+                     MinWidth="220"
                      VerticalAlignment="Center"
                      TextChanged="DirectoryTextBox_TextChanged"/>
             <Button x:Name="BrowseButton"
                     Grid.Column="3"
                     Content="Browse..."
-                    Margin="12,0,0,0"
+                    Height="28"
+                    Margin="8,0,0,0"
                     Padding="12,4"
                     Click="BrowseButton_Click"/>
         </Grid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,12">
+        <Grid Grid.Row="1" Margin="0,0,0,12">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
             <Button x:Name="StartButton"
                     Content="Start Organization"
-                    Padding="12,6"
+                    Height="28"
+                    Padding="12,4"
                     IsEnabled="False"
                     Click="StartButton_Click"/>
             <Button x:Name="CancelButton"
+                    Grid.Column="1"
                     Content="Cancel"
+                    Height="28"
                     Margin="12,0,0,0"
-                    Padding="12,6"
+                    Padding="12,4"
                     IsEnabled="False"
                     Click="CancelButton_Click"/>
-            <Button Content="Configure Categories"
+            <Button Grid.Column="3"
+                    Content="Configure Categories"
+                    Height="28"
                     Margin="12,0,0,0"
-                    Padding="12,6"
+                    Padding="12,4"
                     Click="ConfigureCategoriesButton_Click"/>
-            <Button Content="Settings"
+            <Button Grid.Column="4"
+                    Content="Settings"
+                    Height="28"
                     Margin="12,0,0,0"
-                    Padding="12,6"
+                    Padding="12,4"
                     Click="SettingsButton_Click"/>
-            <Button Content="Exit"
-                    Margin="12,0,0,0"
-                    Padding="12,6"
-                    Click="ExitButton_Click"/>
-        </StackPanel>
+        </Grid>
 
         <Grid Grid.Row="2" Margin="0,0,0,12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <ProgressBar x:Name="ProgressBar"
-                         Height="20"
-                         Minimum="0"
-                         Maximum="100"/>
-            <TextBlock x:Name="StatusText"
-                       Grid.Column="1"
-                       Margin="12,0,0,0"
+            <Grid>
+                <ProgressBar x:Name="ProgressBar"
+                             Height="20"
+                             Minimum="0"
+                             Maximum="100"/>
+            <TextBlock x:Name="ProgressBarText"
+                       HorizontalAlignment="Center"
                        VerticalAlignment="Center"
+                       FontSize="12"
+                       Foreground="#333333"
                        Text="Ready"/>
+            </Grid>
         </Grid>
 
         <RichTextBox x:Name="LogTextBox"

@@ -1,16 +1,17 @@
-# Filebuloso v0.1b Release Notes
+# Filebuloso v0.2 Release Notes
 
 Release date: 2026-01-15
 
 ## Highlights
-- WPF desktop MVP for organizing files by category and removing duplicates.
+- WPF desktop app for organizing files by category and removing duplicates.
 - Hash-first duplicate detection with pattern handling and collision-safe renames.
-- Settings and category editor with auto-save.
+- Optional subfolder duplicate cleanup (keep oldest by date).
 
 ## Core Features
 - Directory picker, progress feedback, and summary report.
 - Category configuration with validation and default set.
 - Duplicate detection (root-only), pattern selection, and rename rules.
+- Subfolder duplicate cleanup by hash (keep oldest).
 - Categorization with lazy collision handling and timestamped version preservation.
 - Logging to user documents folder with rotation/cleanup.
 
@@ -27,4 +28,4 @@ Release date: 2026-01-15
 
 ## Files
 - EXE: `Filebuloso\bin\Release\net8.0-windows\win-x64\publish\Filebuloso.exe`
-- Zip: `Filebuloso_MVP_v0.1b.zip`
+- Zip: `Filebuloso_MVP_v0.2.zip`
